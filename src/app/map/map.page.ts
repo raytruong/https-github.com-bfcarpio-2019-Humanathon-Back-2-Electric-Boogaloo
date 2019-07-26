@@ -46,16 +46,33 @@ export class MapPage implements OnInit {
   }
 
   loadMap() {
+
     var map = L.map('map', {
       crs: L.CRS.Simple,
-      maxBounds: [[-10, -25], [1050, 1050]],
+      maxBounds: [[-1000, -1000], [2000, 2000]],
       maxBoundsViscosity: 1.0,
     });
     var bounds = [[-26.5, -25], [1021.5, 1023]];
     var image = L.imageOverlay('assets/floorplan.svg', bounds).addTo(map);
-    L.marker([120, 30]).addTo(map).on('click', function (e) {
-      alert(this.getLatLng());
-    });
     map.fitBounds(bounds);
+
+    this.plotPoint(120, 30, map)
+
+    map.on("click", function (e) {
+      var mp = new L.Marker([e.latlng.lat, e.latlng.lng])
+      alert(mp.getLatLng());
+    });
+
+  }
+
+  plotPoint(lat, lng, map) {
+
+    L.marker([lat, lng]).addTo(map).on('click', function (e) {
+      map.flyTo([lat, lng], 1, {
+        animate: true,
+        duration: 2
+      })
+    });
+
   }
 }
