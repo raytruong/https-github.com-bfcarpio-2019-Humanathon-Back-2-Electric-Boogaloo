@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 
 import { Map, latLng, tileLayer, Layer, marker } from "leaflet";
 
+declare var L: any;
+
 @Component({
   selector: "app-map",
   templateUrl: "map.page.html",
@@ -44,16 +46,16 @@ export class MapPage implements OnInit {
   }
 
   loadMap() {
-    this.map = new Map("map").setView([this.lat, this.lng], 8);
-
-    tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 18
-    }).addTo(this.map);
+    var map = L.map('map', {
+      crs: L.CRS.Simple,
+      maxBounds: [[-10,-25], [1050, 1050]],
+      maxBoundsViscosity: 1.0,
+    });
+    var bounds = [[-26.5,-25], [1021.5,1023]];
+    var image = L.imageOverlay('assets/floorplan.svg', bounds).addTo(map);
+    L.marker([120,30]).addTo(map).on('click', function(e) {
+      alert(this.getLatLng());
+    });
+    map.fitBounds(bounds);
   }
-  // add back when alpha.4 is out
-  // navigate(item) {
-  //   this.router.navigate(['/map', JSON.stringify(item)]);
-  // }
 }
