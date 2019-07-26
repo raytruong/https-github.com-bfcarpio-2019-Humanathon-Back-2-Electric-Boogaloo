@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-
+import { ToastController } from '@ionic/angular';
 import { Map, latLng, tileLayer, Layer, marker } from "leaflet";
 
 declare var L: any;
@@ -10,7 +10,35 @@ declare var L: any;
   styleUrls: ["map.page.scss"]
 })
 export class MapPage implements OnInit {
+<<<<<<< Updated upstream
   constructor() { }
+=======
+  
+  toast: any;
+  private selectedItem: any;
+  private icons = [
+    "flask",
+    "wifi",
+    "beer",
+    "football",
+    "basketball",
+    "paper-plane",
+    "american-football",
+    "boat",
+    "bluetooth",
+    "build"
+  ];
+  public items: Array<{ title: string; note: string; icon: string }> = [];
+  constructor(public toastController: ToastController) {
+    for (let i = 1; i < 11; i++) {
+      this.items.push({
+        title: "Item " + i,
+        note: "This is item #" + i,
+        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+      });
+    }
+  }
+>>>>>>> Stashed changes
 
   ngOnInit() { }
 
@@ -46,11 +74,14 @@ export class MapPage implements OnInit {
   plotPoint(lat, lng, map) {
 
     L.marker([lat, lng]).addTo(map).on('click', function (e) {
-      map.flyTo([lat, lng], 1, {
-        animate: true,
-        duration: 2
-      })
-    });
-
-  }
+    map.flyTo([lat, lng], 1, {
+        async presentToast() {
+        console.log("present toast");
+        const toast = await this.toastController.create({
+          message: 'Your settings have been saved.',
+          duration: 2000
+        });
+        await toast.present();
+      }
+  });
 }
