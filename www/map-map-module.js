@@ -35,7 +35,7 @@ var MapPageModule = /** @class */ (function () {
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forChild([
                     {
-                        path: '',
+                        path: "",
                         component: _map_page__WEBPACK_IMPORTED_MODULE_6__["MapPage"]
                     }
                 ])
@@ -57,7 +57,7 @@ var MapPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>\n      Map\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item *ngFor=\"let item of items\">\n      <ion-icon [name]=\"item.icon\" slot=\"start\"></ion-icon>\n      {{item.title}}\n      <div class=\"item-note\" slot=\"end\">\n        {{item.note}}\n      </div>\n    </ion-item>\n  </ion-list>\n  <!--\n    <div *ngIf=\"selectedItem\" padding>\n      You navigated here from <b>{{selectedItem.title }}</b>\n    </div>\n  -->\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>\n      Map\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<div id=\"map\" style=\"width:100%; height:100%;\"></div>\n"
 
 /***/ }),
 
@@ -89,31 +89,48 @@ __webpack_require__.r(__webpack_exports__);
 var MapPage = /** @class */ (function () {
     function MapPage() {
         this.icons = [
-            'flask',
-            'wifi',
-            'beer',
-            'football',
-            'basketball',
-            'paper-plane',
-            'american-football',
-            'boat',
-            'bluetooth',
-            'build'
+            "flask",
+            "wifi",
+            "beer",
+            "football",
+            "basketball",
+            "paper-plane",
+            "american-football",
+            "boat",
+            "bluetooth",
+            "build"
         ];
         this.items = [];
+        this.lat = 5;
+        this.lng = 5;
         for (var i = 1; i < 11; i++) {
             this.items.push({
-                title: 'Item ' + i,
-                note: 'This is item #' + i,
+                title: "Item " + i,
+                note: "This is item #" + i,
                 icon: this.icons[Math.floor(Math.random() * this.icons.length)]
             });
         }
     }
-    MapPage.prototype.ngOnInit = function () {
+    MapPage.prototype.ngOnInit = function () { };
+    MapPage.prototype.ionViewDidEnter = function () {
+        this.loadMap();
+    };
+    MapPage.prototype.loadMap = function () {
+        var map = L.map('map', {
+            crs: L.CRS.Simple,
+            maxBounds: [[-10, -25], [1050, 1050]],
+            maxBoundsViscosity: 1.0,
+        });
+        var bounds = [[-26.5, -25], [1021.5, 1023]];
+        var image = L.imageOverlay('assets/floorplan.svg', bounds).addTo(map);
+        L.marker([120, 30]).addTo(map).on('click', function (e) {
+            alert(this.getLatLng());
+        });
+        map.fitBounds(bounds);
     };
     MapPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-map',
+            selector: "app-map",
             template: __webpack_require__(/*! ./map.page.html */ "./src/app/map/map.page.html"),
             styles: [__webpack_require__(/*! ./map.page.scss */ "./src/app/map/map.page.scss")]
         }),
