@@ -15,7 +15,8 @@ const routes: Routes = [
     path: 'map',
     loadChildren: './map/map.module#MapPageModule'
   },
-  { path: 'search', loadChildren: './search/search.module#SearchPageModule' }
+  { path: 'search', loadChildren: './search/search.module#SearchPageModule' },
+  { path: 'add-location', loadChildren: './add-location/add-location.module#AddLocationPageModule' }
 ];
 
 @NgModule({

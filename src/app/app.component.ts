@@ -24,6 +24,11 @@ export class AppComponent {
       title: 'Search',
       url: '/search',
       icon: 'search'
+    },
+    {
+      title: 'Add Location',
+      url: '/add-location',
+      icon: 'add'
     }
   ];
 

@@ -2,14 +2,16 @@ import { Component, OnInit } from "@angular/core";
 
 import { Map, latLng, tileLayer, Layer, marker } from "leaflet";
 
+
 declare var L: any;
 
 @Component({
-  selector: "app-map",
-  templateUrl: "map.page.html",
-  styleUrls: ["map.page.scss"]
+  selector: 'app-add-location',
+  templateUrl: './add-location.page.html',
+  styleUrls: ['./add-location.page.scss'],
 })
-export class MapPage implements OnInit {
+export class AddLocationPage implements OnInit {
+
   constructor() { }
 
   ngOnInit() { }
@@ -53,4 +55,5 @@ export class MapPage implements OnInit {
     });
 
   }
+
 }
