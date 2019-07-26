@@ -48,7 +48,7 @@ export class MapPage implements OnInit {
   loadMap() {
     var map = L.map('map', {
       crs: L.CRS.Simple,
-      maxBounds: [[-10,-25], [1050, 1050]],
+      maxBounds: [[-1000,-1000], [2000, 2000]],
       maxBoundsViscosity: 1.0,
     });
     var bounds = [[-26.5,-25], [1021.5,1023]];
