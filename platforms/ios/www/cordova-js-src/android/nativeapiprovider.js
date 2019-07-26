@@ -1,5 +1,4 @@
 /*
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -16,16 +15,22 @@
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- *
 */
 
-module.exports = {
-    id: 'ios',
-    bootstrap: function () {
-        // Attach the console polyfill that is iOS-only to window.console
-        // see the file under plugin/ios/console.js
-        require('cordova/modulemapper').clobbers('cordova/plugin/ios/console', 'window.console');
+/**
+ * Exports the ExposedJsApi.java object if available, otherwise exports the PromptBasedNativeApi.
+ */
 
-        require('cordova/channel').onNativeReady.fire();
+var nativeApi = this._cordovaNative || require('cordova/android/promptbasednativeapi');
+var currentApi = nativeApi;
+
+module.exports = {
+    get: function() { return currentApi; },
+    setPreferPrompt: function(value) {
+        currentApi = value ? require('cordova/android/promptbasednativeapi') : nativeApi;
+    },
+    // Used only by tests.
+    set: function(value) {
+        currentApi = value;
     }
 };
