@@ -34,7 +34,7 @@ export class MapPage implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   //Lifecycle hooks
   map: Map;
@@ -48,12 +48,12 @@ export class MapPage implements OnInit {
   loadMap() {
     var map = L.map('map', {
       crs: L.CRS.Simple,
-      maxBounds: [[-10,-25], [1050, 1050]],
+      maxBounds: [[-10, -25], [1050, 1050]],
       maxBoundsViscosity: 1.0,
     });
-    var bounds = [[-26.5,-25], [1021.5,1023]];
+    var bounds = [[-26.5, -25], [1021.5, 1023]];
     var image = L.imageOverlay('assets/floorplan.svg', bounds).addTo(map);
-    L.marker([120,30]).addTo(map).on('click', function(e) {
+    L.marker([120, 30]).addTo(map).on('click', function (e) {
       alert(this.getLatLng());
     });
     map.fitBounds(bounds);
