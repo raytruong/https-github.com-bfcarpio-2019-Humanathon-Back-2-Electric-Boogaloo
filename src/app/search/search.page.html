@@ -10,5 +10,12 @@
 </ion-header>
 
 <ion-content>
-
+  <form>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="searchText" name="title" placeholder="search"></ion-input>
+    </ion-item>
+  </form>
+  <ion-item *ngFor="let user of usersArray | filter: searchText">
+    <ion-label co>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{user}}</ion-label>
+  </ion-item>
 </ion-content>

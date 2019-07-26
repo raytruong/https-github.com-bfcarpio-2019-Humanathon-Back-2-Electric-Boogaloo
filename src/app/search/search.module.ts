@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { SearchPage } from './search.page';
+import { HttpModule, Http } from "@angular/http";
+import { FilterPipe } from '../pipes/filter.pipe';
 
 const routes: Routes = [
   {
@@ -19,8 +21,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    HttpModule
   ],
-  declarations: [SearchPage]
+  declarations: [SearchPage, FilterPipe]
 })
-export class SearchPageModule { }
+export class SearchPageModule {
+}
+
