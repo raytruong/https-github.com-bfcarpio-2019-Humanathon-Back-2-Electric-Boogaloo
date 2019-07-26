@@ -102,8 +102,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": [],
-            "scripts": [],
+            "styles": ["./node_modules/leaflet/dist/leaflet.css"],
+            "scripts": ["./node_modules/leaflet/dist/leaflet.js"],
             "assets": [
               {
                 "glob": "favicon.ico",
@@ -114,6 +114,11 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/leaflet/dist/images",
+                "output": "leaflet/"
               }
             ]
           },
