@@ -441,6 +441,10 @@ var map = {
 	"./list/list.module": [
 		"./src/app/list/list.module.ts",
 		"list-list-module"
+	],
+	"./search/search.module": [
+		"./src/app/search/search.module.ts",
+		"search-search-module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -494,7 +498,8 @@ var routes = [
     {
         path: 'list',
         loadChildren: './list/list.module#ListPageModule'
-    }
+    },
+    { path: 'search', loadChildren: './search/search.module#SearchPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -560,6 +565,11 @@ var AppComponent = /** @class */ (function () {
                 title: 'List',
                 url: '/list',
                 icon: 'list'
+            },
+            {
+                title: 'Sdfkwalearch',
+                url: '/search',
+                icon: 'search'
             }
         ];
         this.initializeApp();
