@@ -438,9 +438,9 @@ var map = {
 		"./src/app/home/home.module.ts",
 		"home-home-module"
 	],
-	"./list/list.module": [
-		"./src/app/list/list.module.ts",
-		"list-list-module"
+	"./map/map.module": [
+		"./src/app/map/map.module.ts",
+		"map-map-module"
 	],
 	"./search/search.module": [
 		"./src/app/search/search.module.ts",
@@ -496,8 +496,8 @@ var routes = [
         loadChildren: './home/home.module#HomePageModule'
     },
     {
-        path: 'list',
-        loadChildren: './list/list.module#ListPageModule'
+        path: 'map',
+        loadChildren: './map/map.module#MapPageModule'
     },
     { path: 'search', loadChildren: './search/search.module#SearchPageModule' }
 ];
@@ -562,9 +562,9 @@ var AppComponent = /** @class */ (function () {
                 icon: 'home'
             },
             {
-                title: 'List',
-                url: '/list',
-                icon: 'list'
+                title: 'Map',
+                url: '/map',
+                icon: 'map'
             },
             {
                 title: 'Search',
