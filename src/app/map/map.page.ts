@@ -15,6 +15,10 @@ export class MapPage implements OnInit {
   //Services
   toast: any;
   id;
+  maps: string[] = ["Waterside_10", "demo"];
+  mapPath: any = "assets/demo.svg";
+  map: Map;
+  image: any;
   constructor(
     public toastController: ToastController,
     private route: ActivatedRoute,
@@ -30,12 +34,35 @@ export class MapPage implements OnInit {
   ionViewDidEnter() {
     this.loadMap();
   }
-
+  changeMap(name: string) {
+    if (this.image != null) {
+      this.map.removeLayer(this.image);
+    }
+    this.mapPath = "assets/" + name + ".svg";
+    let bounds = [[-26.5, -25], [1021.5, 1023]];
+    this.image = L.imageOverlay(this.mapPath, bounds);
+    this.image.addTo(this.map);
+    this.map.fitBounds(bounds);
+  }
   //Functions
   loadMap() {
+    try {
+      this.map = L.map("map", {
+        crs: L.CRS.Simple,
+        maxBounds: [[-1000, -1000], [2000, 2000]],
+        maxBoundsViscosity: 1.0
+      });
+    } catch {
+      window.location.reload();
+    }
+    this.changeMap("demo");
+
     let url = `http://localhost:8080/locations/${this.id}`;
-    console.log(url);
     this.http.get(url).subscribe(data => {
+      if (!data) {
+        return;
+      }
+
       //Populate data
       let res = data.json();
 
@@ -43,26 +70,19 @@ export class MapPage implements OnInit {
       let label = res.label;
       let desc = res.description;
       let phone = res.phone;
-      let mapPath = `assets/${res.map}.svg`;
+      let path = res.map;
       let lat = res.y;
       let lng = res.x;
       let bounds = [[-26.5, -25], [1021.5, 1023]];
 
-      let map = L.map("map", {
-        crs: L.CRS.Simple,
-        maxBounds: [[-1000, -1000], [2000, 2000]],
-        maxBoundsViscosity: 1.0
-      });
+      this.changeMap(path);
 
-      L.imageOverlay(mapPath, bounds).addTo(map);
-      map.fitBounds(bounds);
-
-      if (label && desc && phone && mapPath && lat && lng) {
+      if (label && desc && phone && this.mapPath && lat && lng) {
         //Begin plotting marker
-        this.plotPoint(map, lat, lng, label, desc, phone);
+        this.plotPoint(this.map, lat, lng, label, desc, phone);
 
         //Fly to marker and show info
-        map.flyTo([lat, lng], 1, {});
+        this.map.flyTo([lat, lng], 1, {});
         this.showMarkerInfo(label, desc, phone);
 
         /*

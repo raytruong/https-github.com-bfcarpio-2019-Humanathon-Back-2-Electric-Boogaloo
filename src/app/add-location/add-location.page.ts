@@ -36,7 +36,7 @@ export class AddLocationPage implements OnInit {
     }
     catch{ window.location.reload(); }
     var bounds = [[-26.5, -25], [1021.5, 1023]];
-    var image = L.imageOverlay('assets/floorplan.svg', bounds).addTo(map);
+    var image = L.imageOverlay('assets/Waterside_10.svg', bounds).addTo(map);
     map.fitBounds(bounds);
 
     this.plotPoint(120, 30, map)
