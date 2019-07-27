@@ -16,6 +16,6 @@
     </ion-item>
   </form>
   <ion-item *ngFor="let user of usersArray | filter: searchText">
-    <ion-label co>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{user}}</ion-label>
+    <a href="./maps/{{user.id}}">{{user.label}}: {{user.description}}</a>
   </ion-item>
 </ion-content>
