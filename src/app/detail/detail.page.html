@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" color="primary">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Detail
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>Label:&nbsp;{{detail.label}}</ion-item>
+  <ion-item>Description:&nbsp;{{detail.description}}</ion-item>
+  <ion-item>Phone:&nbsp;{{detail.phone}}</ion-item>
+  <ion-item>Map:&nbsp;{{detail.map}}</ion-item>
+</ion-content>
+<ion-button (click)="delete()">Delete</ion-button>
+<ion-button href="./map/{{id}}">Map</ion-button>

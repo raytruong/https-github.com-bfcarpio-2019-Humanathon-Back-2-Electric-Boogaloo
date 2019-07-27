@@ -23,7 +23,8 @@ const routes: Routes = [
   {
     path: "add-location",
     loadChildren: "./add-location/add-location.module#AddLocationPageModule"
-  }
+  },
+  { path: 'detail/:id', loadChildren: './detail/detail.module#DetailPageModule' }
 ];
 
 @NgModule({
