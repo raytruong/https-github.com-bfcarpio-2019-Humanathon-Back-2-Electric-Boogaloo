@@ -33,8 +33,14 @@ export class MapPage implements OnInit {
   }
 
   ionViewDidEnter() {
+    toastController.dismiss();
     this.loadMap();
   }
+
+  ionViewDidLeave() {
+    toastController.dismiss();
+  }
+
   changeMap(name: string) {
     toastController.dismiss();
     if (this.image != null) {
