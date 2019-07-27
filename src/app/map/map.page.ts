@@ -14,10 +14,11 @@ export class MapPage implements OnInit {
   //Services
   toast: any;
   id;
+  map: Map;
   constructor(
     public toastController: ToastController,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   //Lifecycle hooks
   ngOnInit() {
@@ -39,22 +40,25 @@ export class MapPage implements OnInit {
     let lat = 0;
     let lng = 0;
     let bounds = [[-26.5, -25], [1021.5, 1023]];
+    var container = L.DomUtil.get('map');
+    try {
+      this.map = L.map("map", {
+        crs: L.CRS.Simple,
+        maxBounds: [[-1000, -1000], [2000, 2000]],
+        maxBoundsViscosity: 1.0
+      });
+    }
+    catch{ window.location.reload(); }
 
-    let map = L.map("map", {
-      crs: L.CRS.Simple,
-      maxBounds: [[-1000, -1000], [2000, 2000]],
-      maxBoundsViscosity: 1.0
-    });
-
-    L.imageOverlay(mapPath, bounds).addTo(map);
-    map.fitBounds(bounds);
+    L.imageOverlay(mapPath, bounds).addTo(this.map);
+    this.map.fitBounds(bounds);
 
     if (label && desc && phone && mapPath && lat && lng) {
       //Begin plotting marker
-      this.plotPoint(map, lat, lng, label, desc, phone);
+      this.plotPoint(this.map, lat, lng, label, desc, phone);
 
       //Fly to marker and show info
-      map.flyTo([lat, lng], 1, {});
+      this.map.flyTo([lat, lng], 1, {});
       this.showMarkerInfo(label, desc, phone);
 
       /*

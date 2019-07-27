@@ -17,7 +17,7 @@ export class AppComponent {
     },
     {
       title: 'Map',
-      url: '/map',
+      url: '/map/0000',
       icon: 'map'
     },
     {

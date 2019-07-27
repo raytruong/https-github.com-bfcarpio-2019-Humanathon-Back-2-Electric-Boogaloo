@@ -12,10 +12,6 @@ const routes: Routes = [
     loadChildren: "./home/home.module#HomePageModule"
   },
   {
-    path: "map",
-    loadChildren: "./map/map.module#MapPageModule"
-  },
-  {
     path: "map/:id",
     loadChildren: "./map/map.module#MapPageModule"
   },
@@ -32,4 +28,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
