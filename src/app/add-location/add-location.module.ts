@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AddLocationPage } from './add-location.page';
-
+import { HttpModule } from "@angular/http";
 const routes: Routes = [
   {
     path: '',
@@ -19,8 +19,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    HttpModule,
     RouterModule.forChild(routes)
   ],
   declarations: [AddLocationPage]
 })
-export class AddLocationPageModule {}
+export class AddLocationPageModule { }

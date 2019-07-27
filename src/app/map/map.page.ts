@@ -24,7 +24,7 @@ export class MapPage implements OnInit {
     public toastController: ToastController,
     private route: ActivatedRoute,
     private http: Http
-  ) {}
+  ) { }
 
   //Lifecycle hooks
   ngOnInit() {
@@ -42,7 +42,6 @@ export class MapPage implements OnInit {
   }
 
   changeMap(name: string) {
-    toastController.dismiss();
     if (this.image != null) {
       this.map.removeLayer(this.image);
     }
@@ -65,7 +64,7 @@ export class MapPage implements OnInit {
     }
     this.changeMap("demo");
 
-    let url = `http://localhost:8080/locations/${this.id}`;
+    let url = `https://west-coast-grill-1557884126307.appspot.com/locations/${this.id}`;
     this.http.get(url).subscribe(data => {
       if (!data) {
         return;

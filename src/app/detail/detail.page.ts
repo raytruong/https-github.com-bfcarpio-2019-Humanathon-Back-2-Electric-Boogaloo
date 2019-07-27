@@ -14,14 +14,14 @@ export class DetailPage implements OnInit {
   }
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get("id");
-    let url = `http://localhost:8080/locations/${this.id}`;
+    let url = `https://west-coast-grill-1557884126307.appspot.com/locations/${this.id}`;
     this.http.get(url).subscribe(data => {
       this.detail = data.json();
     });
   }
   delete() {
     if (confirm("Are you sure?")) {
-      let url = `http://localhost:8080/locations/${this.id}`;
+      let url = `https://west-coast-grill-1557884126307.appspot.com/locations/${this.id}`;
       this.http.delete(url).subscribe(data => {
       });
     }

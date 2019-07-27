@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import { Map, latLng, tileLayer, Layer, marker } from "leaflet";
+import { Http } from '@angular/http';
 
 
 declare var L: any;
@@ -12,7 +13,7 @@ declare var L: any;
 })
 export class AddLocationPage implements OnInit {
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   ngOnInit() { }
 
@@ -33,8 +34,13 @@ export class AddLocationPage implements OnInit {
   submit(form) {
     let info = form.form.value;
     if (this.latlong != null) {
-      let postObj = { label: info.label, description: info.description, phone: info.phone, floor: info.floor, x: this.latlong.lat, y: this.latlong.lng }
-      console.log(postObj);
+      let postObj = { label: info.label, description: info.description, phone: info.phone, map: info.map, x: this.latlong.lng, y: this.latlong.lat }
+      let url = `https://west-coast-grill-1557884126307.appspot.com/locations`;
+      this.http.post(url, postObj).subscribe(data => {
+        let detail = data.json();
+        window.location.replace("./map/" + detail._id);
+      });
+
     }
     else {
       alert("Please tap a location and resubmit");

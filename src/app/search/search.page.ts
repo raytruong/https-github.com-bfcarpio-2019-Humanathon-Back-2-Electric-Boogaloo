@@ -8,7 +8,7 @@ import { Http } from "@angular/http";
 })
 export class SearchPage implements OnInit {
   // Fake API URL
-  url: string = 'http://localhost:8080/locations';
+  url: string = 'https://west-coast-grill-1557884126307.appspot.com/locations';
   usersArray: Array<object> = [];
   nnum: number = 5;
 
