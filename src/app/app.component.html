@@ -1,17 +1,17 @@
 <ion-app>
-  <ion-split-pane>
-    <ion-menu type="overlay">
-      <ion-header>
-        <ion-toolbar>
+  <ion-split-pane color="primary">
+    <ion-menu color="primary" type="overlay">
+      <ion-header color="primary">
+        <ion-toolbar color="primary">
           <ion-title>Menu</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+        <ion-list color="primary">
+          <ion-menu-toggle color="primary" auto-hide="false" *ngFor="let p of appPages">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
-              <ion-label>
+              <ion-icon color="tertiary" slot="start" [name]="p.icon"></ion-icon>
+              <ion-label color="tertiary">
                 {{p.title}}
               </ion-label>
             </ion-item>
