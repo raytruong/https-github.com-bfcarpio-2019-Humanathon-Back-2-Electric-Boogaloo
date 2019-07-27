@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: "./home/home.module#HomePageModule"
   },
   {
+    path: "map",
+    loadChildren: "./map/map.module#MapPageModule"
+  },
+  {
     path: "map/:id",
     loadChildren: "./map/map.module#MapPageModule"
   },
