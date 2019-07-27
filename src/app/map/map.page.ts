@@ -10,9 +10,31 @@ declare var L: any;
   styleUrls: ["map.page.scss"]
 })
 export class MapPage implements OnInit {
-  constructor() { }
+  private selectedItem: any;
+  private icons = [
+    "flask",
+    "wifi",
+    "beer",
+    "football",
+    "basketball",
+    "paper-plane",
+    "american-football",
+    "boat",
+    "bluetooth",
+    "build"
+  ];
+  public items: Array<{ title: string; note: string; icon: string }> = [];
+  constructor() {
+    for (let i = 1; i < 11; i++) {
+      this.items.push({
+        title: "Item " + i,
+        note: "This is item #" + i,
+        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+      });
+    }
+  }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   //Lifecycle hooks
   map: Map;
@@ -24,28 +46,28 @@ export class MapPage implements OnInit {
   }
 
   loadMap() {
-
+    
     var map = L.map('map', {
       crs: L.CRS.Simple,
-      maxBounds: [[-1000, -1000], [2000, 2000]],
+      maxBounds: [[-1000,-1000], [2000, 2000]],
       maxBoundsViscosity: 1.0,
     });
-    var bounds = [[-26.5, -25], [1021.5, 1023]];
+    var bounds = [[-26.5,-25], [1021.5,1023]];
     var image = L.imageOverlay('assets/floorplan.svg', bounds).addTo(map);
     map.fitBounds(bounds);
 
     this.plotPoint(120, 30, map)
 
-    map.on("click", function (e) {
-      var mp = new L.Marker([e.latlng.lat, e.latlng.lng])
+    map.on("click", function(e){
+      var mp = new L.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
       alert(mp.getLatLng());
     });
-
+    
   }
 
-  plotPoint(lat, lng, map) {
+  plotPoint(lat, lng, map){
 
-    L.marker([lat, lng]).addTo(map).on('click', function (e) {
+    L.marker([lat, lng]).addTo(map).on('click', function(e) {
       map.flyTo([lat, lng], 1, {
         animate: true,
         duration: 2
