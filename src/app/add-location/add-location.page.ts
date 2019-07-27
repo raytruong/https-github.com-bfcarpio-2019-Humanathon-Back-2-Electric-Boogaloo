@@ -26,12 +26,15 @@ export class AddLocationPage implements OnInit {
   }
 
   loadMap() {
-
-    var map = L.map('map', {
-      crs: L.CRS.Simple,
-      maxBounds: [[-1000, -1000], [2000, 2000]],
-      maxBoundsViscosity: 1.0,
-    });
+    let map;
+    try {
+      map = L.map("map", {
+        crs: L.CRS.Simple,
+        maxBounds: [[-1000, -1000], [2000, 2000]],
+        maxBoundsViscosity: 1.0
+      });
+    }
+    catch{ window.location.reload(); }
     var bounds = [[-26.5, -25], [1021.5, 1023]];
     var image = L.imageOverlay('assets/floorplan.svg', bounds).addTo(map);
     map.fitBounds(bounds);
