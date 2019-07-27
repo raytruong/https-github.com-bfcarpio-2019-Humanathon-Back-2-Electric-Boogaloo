@@ -17,46 +17,64 @@ export class AddLocationPage implements OnInit {
   ngOnInit() { }
 
   //Lifecycle hooks
+  toast: any;
+  id;
+  maps: string[] = ["Waterside_10", "demo"];
+  mapPath: any = "assets/demo.svg";
   map: Map;
-  lat: number = 5;
-  lng: number = 5;
+  image: any;
+  latlong: any;
+  mp: any;
+
 
   ionViewDidEnter() {
     this.loadMap();
   }
+  submit(form) {
+    let info = form.form.value;
+    if (this.latlong != null) {
+      let postObj = { label: info.label, description: info.description, phone: info.phone, floor: info.floor, x: this.latlong.lat, y: this.latlong.lng }
+      console.log(postObj);
+    }
+    else {
+      alert("Please tap a location and resubmit");
+    }
 
+  }
+  changeMap(name: string) {
+    if (this.image != null) {
+      this.map.removeLayer(this.image);
+    }
+    this.mapPath = "assets/" + name + ".svg";
+    let bounds = [[-26.5, -25], [1021.5, 1023]];
+    this.image = L.imageOverlay(this.mapPath, bounds);
+    this.image.addTo(this.map);
+    this.map.fitBounds(bounds);
+  }
+  //Functions
   loadMap() {
-    let map;
     try {
-      map = L.map("map", {
+      this.map = L.map("map", {
         crs: L.CRS.Simple,
         maxBounds: [[-1000, -1000], [2000, 2000]],
         maxBoundsViscosity: 1.0
       });
+    } catch {
+      window.location.reload();
     }
-    catch{ window.location.reload(); }
-    var bounds = [[-26.5, -25], [1021.5, 1023]];
-    var image = L.imageOverlay('assets/Waterside_10.svg', bounds).addTo(map);
-    map.fitBounds(bounds);
+    this.changeMap("demo");
 
-    this.plotPoint(120, 30, map)
 
-    map.on("click", function (e) {
-      var mp = new L.Marker([e.latlng.lat, e.latlng.lng])
-      alert(mp.getLatLng());
+    let bounds = [[-26.5, -25], [1021.5, 1023]];
+
+    this.changeMap("demo");
+    this.map.on("click", e => {
+      if (this.mp != null) {
+        this.map.removeLayer(this.mp)
+      }
+      this.mp = new L.Marker([e.latlng.lat, e.latlng.lng]);
+      this.mp.addTo(this.map);
+      this.latlong = this.mp.getLatLng();
     });
-
   }
-
-  plotPoint(lat, lng, map) {
-
-    L.marker([lat, lng]).addTo(map).on('click', function (e) {
-      map.flyTo([lat, lng], 1, {
-        animate: true,
-        duration: 2
-      })
-    });
-
-  }
-
-}
+} 

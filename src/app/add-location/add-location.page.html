@@ -8,5 +8,35 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
+<ion-content style="width:100%; height:50%;" color="primary">
+  <form #form="ngForm" (ngSubmit)="submit(form)">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Add a Location</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input name="label" type="text" placeholder="Label" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="phone" type="phone" placeholder="555-555-5555" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="description" type="text" placeholder="conference room(description)" ngModel required>
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="floor" type="text" placeholder="demo" ngModel required></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Submit</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
 <div id="map" style="width:100%; height:50%;"></div>
