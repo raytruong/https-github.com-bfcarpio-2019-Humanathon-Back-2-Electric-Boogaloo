@@ -22,6 +22,7 @@ export class MapPage implements OnInit {
   //Lifecycle hooks
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get("id"); //bind marker param
+    console.log(this.id);
   }
 
   ionViewDidEnter() {

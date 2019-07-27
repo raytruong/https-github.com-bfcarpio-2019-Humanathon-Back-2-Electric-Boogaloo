@@ -1,22 +1,29 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: "",
+    redirectTo: "home",
+    pathMatch: "full"
   },
   {
-    path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
+    path: "home",
+    loadChildren: "./home/home.module#HomePageModule"
   },
   {
-    path: 'map',
-    loadChildren: './map/map.module#MapPageModule'
+    path: "map",
+    loadChildren: "./map/map.module#MapPageModule"
   },
-  { path: 'search', loadChildren: './search/search.module#SearchPageModule' },
-  { path: 'add-location', loadChildren: './add-location/add-location.module#AddLocationPageModule' }
+  {
+    path: "map/:id",
+    loadChildren: "./map/map.module#MapPageModule"
+  },
+  { path: "search", loadChildren: "./search/search.module#SearchPageModule" },
+  {
+    path: "add-location",
+    loadChildren: "./add-location/add-location.module#AddLocationPageModule"
+  }
 ];
 
 @NgModule({
@@ -25,4 +32,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
