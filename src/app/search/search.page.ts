@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, OnInit } from "@angular/core";
+import { Http } from "@angular/http";
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.page.html',
-  styleUrls: ['./search.page.scss'],
+  selector: "app-search",
+  templateUrl: "./search.page.html",
+  styleUrls: ["./search.page.scss"]
 })
 export class SearchPage implements OnInit {
-
   // Fake API URL
-  url: string = 'https://jsonplaceholder.typicode.com/users';
+  url: string = "https://jsonplaceholder.typicode.com/users";
   usersArray: Array<string> = [];
   nnum: number = 5;
 
@@ -20,10 +19,8 @@ export class SearchPage implements OnInit {
         this.usersArray.push(element.name);
       });
     });
-    console.log(this.usersArray)
+    console.log(this.usersArray);
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

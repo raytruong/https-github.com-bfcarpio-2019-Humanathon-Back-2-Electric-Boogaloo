@@ -84,6 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MapPage", function() { return MapPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+<<<<<<< HEAD
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 
@@ -157,6 +158,40 @@ var MapPage = /** @class */ (function () {
             .on("click", function () {
             map.flyTo([lat, lng], 1, {});
             _this.showMarkerInfo(label, desc, phone);
+=======
+
+
+var MapPage = /** @class */ (function () {
+    function MapPage() {
+        this.lat = 5;
+        this.lng = 5;
+    }
+    MapPage.prototype.ngOnInit = function () { };
+    MapPage.prototype.ionViewDidEnter = function () {
+        this.loadMap();
+    };
+    MapPage.prototype.loadMap = function () {
+        var map = L.map('map', {
+            crs: L.CRS.Simple,
+            maxBounds: [[-1000, -1000], [2000, 2000]],
+            maxBoundsViscosity: 1.0,
+        });
+        var bounds = [[-26.5, -25], [1021.5, 1023]];
+        var image = L.imageOverlay('assets/floorplan.svg', bounds).addTo(map);
+        map.fitBounds(bounds);
+        this.plotPoint(120, 30, map);
+        map.on("click", function (e) {
+            var mp = new L.Marker([e.latlng.lat, e.latlng.lng]);
+            alert(mp.getLatLng());
+        });
+    };
+    MapPage.prototype.plotPoint = function (lat, lng, map) {
+        L.marker([lat, lng]).addTo(map).on('click', function (e) {
+            map.flyTo([lat, lng], 1, {
+                animate: true,
+                duration: 2
+            });
+>>>>>>> 84e2489f99b809983791f16b5c0072f0c7468d18
         });
     };
     MapPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -165,8 +200,12 @@ var MapPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./map.page.html */ "./src/app/map/map.page.html"),
             styles: [__webpack_require__(/*! ./map.page.scss */ "./src/app/map/map.page.scss")]
         }),
+<<<<<<< HEAD
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+=======
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+>>>>>>> 84e2489f99b809983791f16b5c0072f0c7468d18
     ], MapPage);
     return MapPage;
 }());
