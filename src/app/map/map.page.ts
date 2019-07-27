@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Http } from "@angular/http";
 import { ToastController } from "@ionic/angular";
 import { Map, latLng, tileLayer, Layer, marker } from "leaflet";
+import { toastController } from "@ionic/core";
 
 declare var L: any;
 
@@ -35,6 +36,7 @@ export class MapPage implements OnInit {
     this.loadMap();
   }
   changeMap(name: string) {
+    toastController.dismiss();
     if (this.image != null) {
       this.map.removeLayer(this.image);
     }
@@ -98,8 +100,11 @@ export class MapPage implements OnInit {
 
   async showMarkerInfo(label, desc, phone) {
     const toast = await this.toastController.create({
-      message: `${label} | ${desc} | ${phone}`,
-      duration: 5000
+      header: `${label}`,
+      message: `${desc}\n${phone}`,
+      closeButtonText: "x",
+      showCloseButton: false,
+      mode: "ios"
     });
     await toast.present();
   }
