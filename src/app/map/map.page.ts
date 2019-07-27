@@ -14,7 +14,10 @@ export class MapPage implements OnInit {
   //Services
   toast: any;
   id;
+  maps: string[] = ["Waterside_10", "demo"]
+  mapPath: any = "assets/demo.svg";
   map: Map;
+  image: any;
   constructor(
     public toastController: ToastController,
     private route: ActivatedRoute
@@ -29,14 +32,22 @@ export class MapPage implements OnInit {
   ionViewDidEnter() {
     this.loadMap();
   }
-
+  changeMap(name: string) {
+    if (this.image != null) {
+      this.map.removeLayer(this.image)
+    }
+    this.mapPath = "assets/" + name + ".svg";
+    let bounds = [[-26.5, -25], [1021.5, 1023]];
+    this.image = L.imageOverlay(this.mapPath, bounds)
+    this.image.addTo(this.map)
+    L.markerClusterGroup();
+  }
   //Functions
   loadMap() {
     //API get id marker info
     let label = "Raymond Truong";
     let desc = "Intern General 2";
     let phone = "123-456-7890";
-    let mapPath = "assets/floorplan.svg";
     let lat = 0;
     let lng = 0;
     let bounds = [[-26.5, -25], [1021.5, 1023]];
@@ -50,10 +61,11 @@ export class MapPage implements OnInit {
     }
     catch{ window.location.reload(); }
 
-    L.imageOverlay(mapPath, bounds).addTo(this.map);
+    this.image = L.imageOverlay(this.mapPath, bounds)
+    this.image.addTo(this.map)
     this.map.fitBounds(bounds);
 
-    if (label && desc && phone && mapPath && lat && lng) {
+    if (label && desc && phone && this.mapPath && lat && lng) {
       //Begin plotting marker
       this.plotPoint(this.map, lat, lng, label, desc, phone);
 

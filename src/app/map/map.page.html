@@ -6,6 +6,11 @@
     <ion-title>
       Map
     </ion-title>
+    <ion-select slot="end" interface="popover" [(ngModel)]="value" (ionChange)="changeMap($event.target.value)"
+      placeholder="Select One">
+      <ion-select-option value="demo">demo</ion-select-option>
+      <ion-select-option value="Waterside_10">Waterside 10</ion-select-option>
+    </ion-select>
   </ion-toolbar>
 </ion-header>
 
