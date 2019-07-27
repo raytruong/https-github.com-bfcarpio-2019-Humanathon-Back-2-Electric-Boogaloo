@@ -23,6 +23,7 @@ export class DetailPage implements OnInit {
     if (confirm("Are you sure?")) {
       let url = `https://west-coast-grill-1557884126307.appspot.com/locations/${this.id}`;
       this.http.delete(url).subscribe(data => {
+        window.location.replace("./search")
       });
     }
   }
