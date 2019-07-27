@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, OnInit } from "@angular/core";
+import { Http } from "@angular/http";
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.page.html',
-  styleUrls: ['./search.page.scss'],
+  selector: "app-search",
+  templateUrl: "./search.page.html",
+  styleUrls: ["./search.page.scss"]
 })
 export class SearchPage implements OnInit {
-
   // Fake API URL
   url: string = 'http://localhost:8080/locations';
   usersArray: Array<object> = [];
@@ -20,10 +19,8 @@ export class SearchPage implements OnInit {
         this.usersArray.push(element);
       });
     });
-    console.log(this.usersArray)
+    console.log(this.usersArray);
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() { }
 }
