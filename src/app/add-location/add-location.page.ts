@@ -26,7 +26,7 @@ export class AddLocationPage implements OnInit {
   image: any;
   latlong: any;
   mp: any;
-
+  value: any;
 
   ionViewDidEnter() {
     this.loadMap();

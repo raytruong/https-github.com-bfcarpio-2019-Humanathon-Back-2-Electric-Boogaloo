@@ -11,7 +11,7 @@ export class SearchPage implements OnInit {
   url: string = 'https://west-coast-grill-1557884126307.appspot.com/locations';
   usersArray: Array<object> = [];
   nnum: number = 5;
-
+  searchText: string;
   constructor(private http: Http) {
     this.http.get(this.url).subscribe(data => {
       // Populating usersArray with names from API

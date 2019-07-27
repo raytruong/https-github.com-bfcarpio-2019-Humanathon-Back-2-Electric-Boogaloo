@@ -20,6 +20,7 @@ export class MapPage implements OnInit {
   mapPath: any = "assets/demo.svg";
   map: Map;
   image: any;
+  value: any;
   constructor(
     public toastController: ToastController,
     private route: ActivatedRoute,
