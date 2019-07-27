@@ -434,6 +434,10 @@ module.exports = webpackAsyncContext;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./add-location/add-location.module": [
+		"./src/app/add-location/add-location.module.ts",
+		"add-location-add-location-module"
+	],
 	"./home/home.module": [
 		"./src/app/home/home.module.ts",
 		"home-home-module"
@@ -499,7 +503,8 @@ var routes = [
         path: 'map',
         loadChildren: './map/map.module#MapPageModule'
     },
-    { path: 'search', loadChildren: './search/search.module#SearchPageModule' }
+    { path: 'search', loadChildren: './search/search.module#SearchPageModule' },
+    { path: 'add-location', loadChildren: './add-location/add-location.module#AddLocationPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -570,6 +575,11 @@ var AppComponent = /** @class */ (function () {
                 title: 'Search',
                 url: '/search',
                 icon: 'search'
+            },
+            {
+                title: 'Add Location',
+                url: '/add-location',
+                icon: 'add'
             }
         ];
         this.initializeApp();
@@ -713,7 +723,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/jacobloukota/Desktop/Humanathon/2019-Humanathon-Front/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/ray/Docker/Hackathon/2019-Humanathon-Front/src/main.ts */"./src/main.ts");
 
 
 /***/ })

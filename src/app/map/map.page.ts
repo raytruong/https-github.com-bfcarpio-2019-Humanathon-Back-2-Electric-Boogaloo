@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { ToastController } from '@ionic/angular';
+import { ActivatedRoute } from "@angular/router";
+import { ToastController } from "@ionic/angular";
 import { Map, latLng, tileLayer, Layer, marker } from "leaflet";
 
 declare var L: any;
@@ -10,78 +11,75 @@ declare var L: any;
   styleUrls: ["map.page.scss"]
 })
 export class MapPage implements OnInit {
-<<<<<<< Updated upstream
-  constructor() { }
-=======
-  
+  //Services
   toast: any;
-  private selectedItem: any;
-  private icons = [
-    "flask",
-    "wifi",
-    "beer",
-    "football",
-    "basketball",
-    "paper-plane",
-    "american-football",
-    "boat",
-    "bluetooth",
-    "build"
-  ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor(public toastController: ToastController) {
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: "Item " + i,
-        note: "This is item #" + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
-  }
->>>>>>> Stashed changes
-
-  ngOnInit() { }
+  id;
+  constructor(
+    public toastController: ToastController,
+    private route: ActivatedRoute
+  ) {}
 
   //Lifecycle hooks
-  map: Map;
-  lat: number = 5;
-  lng: number = 5;
+  ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get("id"); //bind marker param
+  }
 
   ionViewDidEnter() {
     this.loadMap();
   }
 
+  //Functions
   loadMap() {
+    //API get id marker info
+    let label = "Raymond Truong";
+    let desc = "Intern General 2";
+    let phone = "123-456-7890";
+    let mapPath = "assets/floorplan.svg";
+    let lat = 0;
+    let lng = 0;
+    let bounds = [[-26.5, -25], [1021.5, 1023]];
 
-    var map = L.map('map', {
+    let map = L.map("map", {
       crs: L.CRS.Simple,
       maxBounds: [[-1000, -1000], [2000, 2000]],
-      maxBoundsViscosity: 1.0,
+      maxBoundsViscosity: 1.0
     });
-    var bounds = [[-26.5, -25], [1021.5, 1023]];
-    var image = L.imageOverlay('assets/floorplan.svg', bounds).addTo(map);
+
+    L.imageOverlay(mapPath, bounds).addTo(map);
     map.fitBounds(bounds);
 
-    this.plotPoint(120, 30, map)
+    if (label && desc && phone && mapPath && lat && lng) {
+      //Begin plotting marker
+      this.plotPoint(map, lat, lng, label, desc, phone);
 
-    map.on("click", function (e) {
-      var mp = new L.Marker([e.latlng.lat, e.latlng.lng])
-      alert(mp.getLatLng());
-    });
+      //Fly to marker and show info
+      map.flyTo([lat, lng], 1, {});
+      this.showMarkerInfo(label, desc, phone);
 
+      /*
+      This snippet tells you where you tapped on the map when tapped
+      map.on("click", e => {
+        let mp = new L.Marker([e.latlng.lat, e.latlng.lng]);
+        alert(mp.getLatLng());
+      });
+      */
+    }
   }
 
-  plotPoint(lat, lng, map) {
+  async showMarkerInfo(label, desc, phone) {
+    const toast = await this.toastController.create({
+      message: `${label} | ${desc} | ${phone}`,
+      duration: 5000
+    });
+    await toast.present();
+  }
 
-    L.marker([lat, lng]).addTo(map).on('click', function (e) {
-    map.flyTo([lat, lng], 1, {
-        async presentToast() {
-        console.log("present toast");
-        const toast = await this.toastController.create({
-          message: 'Your settings have been saved.',
-          duration: 2000
-        });
-        await toast.present();
-      }
-  });
+  plotPoint(map, lat, lng, label, desc, phone) {
+    L.marker([lat, lng])
+      .addTo(map)
+      .on("click", () => {
+        map.flyTo([lat, lng], 1, {});
+        this.showMarkerInfo(label, desc, phone);
+      });
+  }
 }
